@@ -29,9 +29,13 @@ namespace MicroBlessingsApi.Controllers
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new Blessing
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                ModelId = Guid.NewGuid(),
+                BlessingType = new BlessingType {
+                     ModelId = Guid.NewGuid(),
+                     Name = "BasketballNet",
+                     DisplayName = "Basketball Net",
+                     Description = "Description"
+                }
             })
             .ToArray();
         }
