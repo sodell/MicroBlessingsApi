@@ -8,13 +8,9 @@ using Microsoft.Extensions.Logging;
 namespace MicroBlessingsApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("blessings")]
     public class BlessingsController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
         private readonly ILogger<BlessingsController> _logger;
 
