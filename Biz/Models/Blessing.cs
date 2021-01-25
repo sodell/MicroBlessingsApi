@@ -1,16 +1,16 @@
 using System;
+using MicroBlessingsApi.Biz.Models.Core;
 
 namespace MicroBlessingsApi
 {
     /// <summary>
     /// Represents a blessing within the micro blessings system
     /// </summary>
-    public class Blessing 
+    public class Blessing : ModelObject<Blessing>
     {
-        /// <summary>
-        /// The unique identifier of a blessing
-        /// </summary>
-        public Guid ModelId { get; set;}
+        public Blessing(ModelId<Blessing> modelId) : base(modelId)
+        {
+        }
 
         /// <summary>
         /// The type of blessing

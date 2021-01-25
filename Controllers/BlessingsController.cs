@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MicroBlessingsApi.Biz.Models.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -23,9 +24,8 @@ namespace MicroBlessingsApi.Controllers
         public IEnumerable<Blessing> Get()
         {
             var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new Blessing
+            return Enumerable.Range(1, 5).Select(index => new Blessing(new ModelId<Blessing>(Guid.NewGuid()))
             {
-                ModelId = Guid.NewGuid(),
                 BlessingType = new BlessingType {
                      ModelId = Guid.NewGuid(),
                      Name = "BasketballNet",

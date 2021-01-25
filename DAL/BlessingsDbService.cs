@@ -2,7 +2,7 @@ using MicroBlessingsApi.Biz.Models.Core;
 
 namespace MicroBlessingsApi.DAL
 {
-    public class BlessingsDbService
+    public class BlessingsDbService : IBlessingsDbService
     {
         public BlessingsDbService()
         {
