@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using MicroBlessingsApi.Biz.Models.Core;
 
-namespace MicroBlessingsApi.DAL
+namespace MicroBlessingsApi.Biz.Services
 {
-    public interface IBlessingsDbService
+    public interface IBlessingsService
     {
         Task<Blessing> GetBlessing(ModelId<Blessing> blessingId);
     }

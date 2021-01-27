@@ -1,10 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using MicroBlessingsApi.Biz.Models.Core;
 using MicroBlessingsApi.DAL;
 
 namespace MicroBlessingsApi.Biz.Services
 {
-    public class BlessingsService
+
+    public class BlessingsService : IBlessingsService
     {
         private readonly IBlessingsDbService _blessingsDbService;
 
@@ -13,11 +15,11 @@ namespace MicroBlessingsApi.Biz.Services
             _blessingsDbService = blessingsDbService;
         }
 
-        public Blessing GetBlessing(ModelId<Blessing> blessingId)
+        public async Task<Blessing> GetBlessing(ModelId<Blessing> blessingId)
         {
             try
             {
-                return _blessingsDbService.GetBlessing(blessingId);
+                return await _blessingsDbService.GetBlessing(blessingId);
             }
             catch (Exception e)
             {
