@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MicroBlessingsApi.Biz.Models.Core;
+using MicroBlessingsApi.Biz.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -13,27 +14,20 @@ namespace MicroBlessingsApi.Controllers
     public class BlessingsController : ControllerBase
     {
 
+        private readonly IBlessingsService _blessingsService;
         private readonly ILogger<BlessingsController> _logger;
 
-        public BlessingsController(ILogger<BlessingsController> logger)
+        public BlessingsController(IBlessingsService blessingsService, ILogger<BlessingsController> logger)
         {
+            _blessingsService = blessingsService;
             _logger = logger;
         }
 
         [HttpGet]
-        public IEnumerable<Blessing> Get()
+        public async Task<Blessing> Get([FromRoute] Guid blessingId)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new Blessing(new ModelId<Blessing>(Guid.NewGuid()))
-            {
-                BlessingType = new BlessingType {
-                     ModelId = Guid.NewGuid(),
-                     Name = "BasketballNet",
-                     DisplayName = "Basketball Net",
-                     Description = "Description"
-                }
-            })
-            .ToArray();
+            var blessingModelId = new ModelId<Blessing>(blessingId, 0);
+            return await _blessingsService.GetBlessing(blessingModelId);
         }
     }
 }
