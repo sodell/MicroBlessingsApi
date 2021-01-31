@@ -15,28 +15,41 @@ namespace MicroBlessingsApi.DAL
             SELECT * FROM Blessing
             WHERE ModelId = @ModelId";
 
+        private readonly string CreateQuery = @"
+
+        ";
+
+        private readonly string SearchQuery = @"
+
+        ";
+
         public BlessingsDbService()
         {
 
         }
 
-        public Task<Blessing> CreateBlessing(CreateBlessingInfo createBlessingInfo)
+        public async Task<Blessing> CreateBlessing(CreateBlessingInfo createBlessingInfo)
         {
-            throw new System.NotImplementedException();
+            using (IDbConnection db = new SqlConnection(""))
+            {
+                return await db.QuerySingleAsync<Blessing>(CreateQuery, new { });
+            }
         }
 
         public async Task<Blessing> GetBlessing(ModelId<Blessing> blessingId)
         {
             using (IDbConnection db = new SqlConnection(""))
             {
-                var result = await db.QueryAsync<Blessing>(GetQuery, new { blessingId });
-                return result.SingleOrDefault();
+                return  await db.QuerySingleAsync<Blessing>(GetQuery, new { blessingId });
             }
         }
 
-        public Task<IEnumerable<Blessing>> SearchBlessings(SearchBlessingsCriteria searchBlessingsCriteria)
+        public async Task<IEnumerable<Blessing>> SearchBlessings(SearchBlessingsCriteria searchBlessingsCriteria)
         {
-            throw new System.NotImplementedException();
+            using (IDbConnection db = new SqlConnection(""))
+            {
+                return await db.QueryAsync<Blessing>(SearchQuery, new { });
+            }
         }
     }
 }
