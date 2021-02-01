@@ -40,7 +40,7 @@ namespace MicroBlessingsApi.DAL
         {
             using (IDbConnection db = new SqlConnection(""))
             {
-                return  await db.QuerySingleAsync<Blessing>(GetQuery, new { blessingId });
+                return  await db.QuerySingleAsync<Blessing>(GetQuery, new { ModelId = blessingId });
             }
         }
 
