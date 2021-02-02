@@ -1,17 +1,17 @@
 using System;
 using System.Collections.Generic;
+using MicroBlessingsApi.Biz.Models.Core;
 
 namespace MicroBlessingsApi
 {
     /// <summary>
     /// Represents a blessing type
     /// </summary>
-    public class BlessingType
+    public class BlessingType : ModelObject<BlessingType>
     {
-        /// <summary>
-        /// The unique identifier of a blessing type
-        /// </summary>
-        public Guid ModelId { get; set;}
+        protected BlessingType(ModelId<BlessingType> modelId) : base(modelId)
+        {
+        }
 
         /// <summary>
         /// The name of a blessing type

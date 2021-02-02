@@ -16,7 +16,6 @@ namespace MicroBlessingsApi.DAL
             WHERE ModelId = @ModelId";
 
         private readonly string CreateQuery = @"
-
         ";
 
         private readonly string SearchQuery = @"
