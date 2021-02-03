@@ -13,9 +13,13 @@ namespace MicroBlessingsApi.DAL
     {
         private readonly string GetQuery = @"
             SELECT * FROM Blessing
-            WHERE ModelId = @ModelId";
+            WHERE ModelId = @ModelId;";
 
         private readonly string CreateQuery = @"
+            INSERT INTO Blessing
+            (blessing_type_model_id, notes, status_type_id)
+            VALUES
+            (@BlessingTypeModelId, @Notes, @StatusTypeId);
         ";
 
         private readonly string SearchQuery = @"
@@ -31,7 +35,10 @@ namespace MicroBlessingsApi.DAL
         {
             using (IDbConnection db = new SqlConnection(""))
             {
-                return await db.QuerySingleAsync<Blessing>(CreateQuery, new { });
+                return await db.QuerySingleAsync<Blessing>(CreateQuery, new {
+                    BlessingTypeModelId = createBlessingInfo.BlessingTypeModelId,
+                    Notes = createBlessingInfo.Notes,
+                    StatusTypeId = createBlessingInfo.StatusType });
             }
         }
 
