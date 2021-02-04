@@ -23,7 +23,9 @@ namespace MicroBlessingsApi.DAL
         ";
 
         private readonly string SearchQuery = @"
-
+            SELECT * FROM Blessing
+            WHERE (@StatusTypeId IS NULL || (@StatusTypeId IS NOT NULL && @StatusTypeId = StatusTypeId))
+              AND (@BlessingTypeModelId IS NULL || (@BlessingTypeModelId IS NOT NULL && @BlessingTypeModelId = BlessingTypeModelId));
         ";
 
         public BlessingsDbService()
@@ -54,7 +56,9 @@ namespace MicroBlessingsApi.DAL
         {
             using (IDbConnection db = new SqlConnection(""))
             {
-                return await db.QueryAsync<Blessing>(SearchQuery, new { });
+                return await db.QueryAsync<Blessing>(SearchQuery, new {
+                    BlessingTypeModelId = searchBlessingsCriteria.BlessingTypeModelId,
+                    StatusTypeId = searchBlessingsCriteria.StatusType });
             }
         }
     }
